@@ -299,6 +299,37 @@
   }
   @keyframes riflesso { to { transform: translateX(100%); } }
 
+  /* ===== CONTATTI ===== */
+  .contatti {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .contatti p {
+    color: #b0aa9a;
+    margin-bottom: 14px;
+  }
+  .mail-link {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.1em;
+    color: #DFC88E;
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(223, 200, 142, 0.35);
+    transition: color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
+  }
+  .mail-link:hover {
+    color: #F2E2B6;
+    border-color: rgba(242, 226, 182, 0.85);
+    text-shadow: 0 0 16px rgba(223, 200, 142, 0.55);
+  }
+  .mail-link:focus-visible {
+    outline: 2px solid #F2E2B6;
+    outline-offset: 6px;
+  }
+
   .footer {
     text-align: center;
     font-size: 0.8rem;
@@ -313,7 +344,7 @@
     .play-btn span::after,
     .gallery .placeholder::before { animation: none; }
     .play-btn:hover span { animation: none; }
-    .play-btn span, .play-btn span::before, .gallery .placeholder { transition: none; }
+    .play-btn span, .play-btn span::before, .gallery .placeholder, .mail-link { transition: none; }
   }
 </style>
 </head>
@@ -342,6 +373,13 @@
     <div class="placeholder"></div>
     <div class="placeholder"></div>
     <div class="placeholder"></div>
+  </div>
+
+  <p class="section-title">Contatti</p>
+  <div class="contatti">
+    <p>Domande, idee o collaborazioni? Scrivimi.</p>
+    <a id="mail" class="mail-link" href="#">Scrivi un messaggio</a>
+    <noscript><p>info [chiocciola] taen.games</p></noscript>
   </div>
 
   <div class="footer">
@@ -387,6 +425,18 @@
     b.style.setProperty('--x', (e.clientX - r.left) + 'px');
     b.style.setProperty('--y', (e.clientY - r.top) + 'px');
   });
+
+  /* contatto email: l'indirizzo viene composto qui, così i programmi che
+     raccolgono indirizzi dalle pagine (spam) fanno più fatica a trovarlo */
+  (function () {
+    var a = document.getElementById('mail');
+    if (!a) return;
+    var utente = 'info';
+    var dominio = 'taen.games';
+    var indirizzo = utente + '@' + dominio;
+    a.href = 'mailto:' + indirizzo;
+    a.textContent = indirizzo;
+  })();
 
   /* ===== TEMPESTA ===== */
   (function () {
