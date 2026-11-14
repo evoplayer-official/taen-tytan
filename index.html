@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TA'EN TYTAN</title>
+
+<link rel="preconnect" href="https://googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://googleapis.com/css2?family=Black+Ops+One&family=Cinzel:wght@800;900&family=Teko:wght@700&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Liberation Sans', sans-serif;
+    background: #1a1a1a;
+    color: #e0ddd5;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+  h1.oro-texturizzato {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 7vw, 4.8rem);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1.1;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://w3.org id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.28'/%3E%3C/svg%3E"),
+      linear-gradient(135deg, #7A5C29 0%, #DFC88E 25%, #9E7B38 50%, #F2E2B6 75%, #6B4F1D 100%);
+    background-blend-mode: overlay;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.85));
+  }
+  .tagline {
+    text-align: center;
+    font-size: 1rem;
+    color: #8a8578;
+    margin-bottom: 48px;
+    font-style: italic;
+  }
+  .quote {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #b0aa9a;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+  }
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    margin-bottom: 60px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #111;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+  .video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .play-btn {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+    cursor: pointer;
+    background: radial-gradient(circle at center, #2a2620 0%, #141210 70%);
+    color: #DFC88E;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+  }
+  .play-btn:hover {
+    color: #F2E2B6;
+    background: radial-gradient(circle at center, #3a342a 0%, #1a1714 70%);
+  }
+  .play-btn span {
+    width: 90px; height: 90px;
+    border: 2px solid #DFC88E;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 8px;
+  }
+  .section-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #6a6558;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+    margin-bottom: 60px;
+  }
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+    display: block;
+  }
+  .gallery .placeholder {
+    width: 100%;
+    padding-bottom: 56.25%;
+    background: #252525;
+    border-radius: 3px;
+    position: relative;
+  }
+  .gallery .placeholder::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px; height: 32px;
+    border: 1px solid #3a3a3a;
+    border-radius: 50%;
+  }
+  .footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #4a4840;
+    padding-top: 20px;
+    border-top: 1px solid #2a2a2a;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1 class="oro-texturizzato">TA'EN TYTAN</h1>
+
+  <p class="tagline">Un videogioco in costruzione</p>
+
+  <p class="quote">«La cosa più grande della tua vita non si lascia guardare intera, eppure ci stai dentro.»</p>
+
+  <div class="video-wrap" id="box1">
+    <button class="play-btn" onclick="apriVideo('box1','https://peertube.uno/w/f33ESe1NpJXN7fft5hr1mS')"><span>▶</span></button>
+  </div>
+
+  <div class="video-wrap" id="box2">
+    <button class="play-btn" onclick="apriVideo('box2','https://peertube.uno/w/hAhRX1ML9RGQgVaSBXuV3s')"><span>▶</span></button>
+  </div>
+
+  <p class="section-title">Il mondo</p>
+  <div class="gallery">
+    <div class="placeholder"></div>
+    <div class="placeholder"></div>
+    <div class="placeholder"></div>
+  </div>
+
+  <div class="footer">
+    <p>taen.games</p>
+  </div>
+
+</div>
+
+<script>
+  var URL1 = 'https://peertube.uno/w/f33ESe1NpJXN7fft5hr1mS';
+  var URL2 = 'https://peertube.uno/w/hAhRX1ML9RGQgVaSBXuV3s';
+
+  function chiudi(id) {
+    var box = document.getElementById(id);
+    var f = box.querySelector('iframe');
+    if (f) {
+      box.innerHTML = '';
+      var b = document.createElement('button');
+      b.className = 'play-btn';
+      b.innerHTML = '<span>▶</span>';
+      b.onclick = function(){ apriVideo(id, id === 'box1' ? URL1 : URL2); };
+      box.appendChild(b);
+    }
+  }
+
+  function apriVideo(id, url) {
+    chiudi(id === 'box1' ? 'box2' : 'box1');
+    var box = document.getElementById(id);
+    box.innerHTML = '';
+    var f = document.createElement('iframe');
+    f.src = url;
+    f.setAttribute('allowfullscreen', '');
+    box.appendChild(f);
+  }
+</script>
+</body>
+</html>
