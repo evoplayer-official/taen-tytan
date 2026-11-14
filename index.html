@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TA'EN TYTAN</title>
 
-<link rel="preconnect" href="https://googleapis.com">
-<link rel="preconnect" href="https://gstatic.com" crossorigin>
-<link href="https://googleapis.com/css2?family=Black+Ops+One&family=Cinzel:wght@800;900&family=Teko:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800;900&display=swap" rel="stylesheet">
 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,11 +17,25 @@
     color: #e0ddd5;
     line-height: 1.6;
   }
+
+  /* ===== TEMPESTA: i fulmini vengono disegnati qui, dietro ai contenuti ===== */
+  #tempesta {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
   .container {
+    position: relative;
+    z-index: 1;
     max-width: 900px;
     margin: 0 auto;
     padding: 60px 24px;
   }
+
+  /* ===== TITOLO: oro texturizzato + riflesso di luce che scorre ogni tanto ===== */
   h1.oro-texturizzato {
     font-family: 'Cinzel', serif;
     font-size: clamp(2.8rem, 7vw, 4.8rem);
@@ -30,15 +44,32 @@
     text-align: center;
     margin-bottom: 12px;
     line-height: 1.1;
-    background-image: 
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://w3.org id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.28'/%3E%3C/svg%3E"),
+    background-image:
+      linear-gradient(105deg, transparent 44%, rgba(255, 250, 232, 0.95) 50%, transparent 56%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.28'/%3E%3C/svg%3E"),
       linear-gradient(135deg, #7A5C29 0%, #DFC88E 25%, #9E7B38 50%, #F2E2B6 75%, #6B4F1D 100%);
-    background-blend-mode: overlay;
+    background-size: 250% 100%, auto, auto;
+    background-repeat: no-repeat, repeat, no-repeat;
+    background-position: 100% 0, 0 0, 0 0;
+    background-blend-mode: normal, overlay, overlay;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.85));
+    transition: filter 0.25s ease-out;
+    animation: riflessoTitolo 12s ease-in-out 5s infinite;
+  }
+  /* il riflesso attraversa le lettere in circa 1,7 secondi, poi il titolo resta fermo */
+  @keyframes riflessoTitolo {
+    0%   { background-position: 100% 0, 0 0, 0 0; }
+    14%  { background-position: 0% 0, 0 0, 0 0; }
+    100% { background-position: 0% 0, 0 0, 0 0; }
+  }
+  /* quando cade un fulmine il titolo si illumina di luce fredda */
+  h1.oro-texturizzato.colpo {
+    filter: drop-shadow(0 0 18px rgba(190, 215, 255, 0.75)) drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.85));
+    transition: filter 0.05s linear;
   }
   .tagline {
     text-align: center;
@@ -55,6 +86,8 @@
     margin: 0 auto 48px;
     line-height: 1.8;
   }
+
+  /* ===== VIDEO ===== */
   .video-wrap {
     position: relative;
     width: 100%;
@@ -63,7 +96,13 @@
     border-radius: 4px;
     overflow: hidden;
     background: #111;
+    border: 1px solid rgba(223, 200, 142, 0.22);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+  .video-wrap:hover {
+    border-color: rgba(223, 200, 142, 0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(223, 200, 142, 0.12);
   }
   .video-wrap iframe {
     position: absolute;
@@ -71,33 +110,145 @@
     width: 100%; height: 100%;
     border: none;
   }
+
+  /* ===== PLAY: sigillo dorato che crepita ===== */
   .play-btn {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
     border: none;
     cursor: pointer;
-    background: radial-gradient(circle at center, #2a2620 0%, #141210 70%);
+    overflow: hidden;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), #3a342a 0%, #141210 65%);
     color: #DFC88E;
     font-size: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.25s ease;
   }
   .play-btn:hover {
-    color: #F2E2B6;
-    background: radial-gradient(circle at center, #3a342a 0%, #1a1714 70%);
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), #4a4132 0%, #141210 65%);
   }
+  .play-btn:focus-visible {
+    outline: 2px solid #F2E2B6;
+    outline-offset: -6px;
+  }
+
+  /* vignettatura ai bordi */
+  .play-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.65) 100%);
+  }
+  /* anello tratteggiato che ruota lento */
+  .play-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 140px; height: 140px;
+    margin: -70px 0 0 -70px;
+    border: 1px dashed rgba(223, 200, 142, 0.35);
+    border-radius: 50%;
+    animation: gira 24s linear infinite;
+    transition: border-color 0.3s ease;
+  }
+  .play-btn:hover::before { border-color: rgba(205, 225, 255, 0.85); }
+  @keyframes gira { to { transform: rotate(360deg); } }
+
   .play-btn span {
-    width: 90px; height: 90px;
+    position: relative;
+    z-index: 1;
+    width: 100px; height: 100px;
+    padding: 0;
+    font-size: 0;
     border: 2px solid #DFC88E;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 8px;
+    background: radial-gradient(circle at 35% 30%, rgba(242, 226, 182, 0.28), rgba(20, 18, 16, 0.7) 70%);
+    box-shadow:
+      0 0 0 6px rgba(223, 200, 142, 0.08),
+      0 12px 30px rgba(0, 0, 0, 0.7),
+      0 0 28px rgba(223, 200, 142, 0.22),
+      inset 0 2px 6px rgba(255, 240, 200, 0.3),
+      inset 0 -8px 16px rgba(0, 0, 0, 0.6);
+    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3), box-shadow 0.35s ease;
   }
+  /* triangolo disegnato in oro */
+  .play-btn span::before {
+    content: "";
+    width: 34px; height: 40px;
+    margin-left: 7px;
+    background: linear-gradient(135deg, #F2E2B6, #9E7B38);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    transition: transform 0.35s ease;
+  }
+  /* anello pulsante */
+  .play-btn span::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 2px solid #DFC88E;
+    animation: onda 2.4s ease-out infinite;
+  }
+  @keyframes onda {
+    0%   { transform: scale(1);   opacity: 0.7; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+
+  /* al passaggio del mouse: sale e crepita, con scariche di luce fredda irregolari */
+  .play-btn:hover span {
+    transform: scale(1.14) translateY(-5px);
+    border-color: #F2E2B6;
+    animation: crepita 1.7s steps(1, end) infinite;
+  }
+  .play-btn:hover span::after { border-color: #dbe9ff; }
+  .play-btn:hover span::before { transform: scale(1.12); }
+  .play-btn:active span { transform: scale(0.95); }
+
+  @keyframes crepita {
+    0%, 100% {
+      box-shadow: 0 0 0 8px rgba(223, 200, 142, 0.14), 0 22px 44px rgba(0, 0, 0, 0.75),
+                  0 0 50px rgba(223, 200, 142, 0.5), inset 0 2px 6px rgba(255, 245, 215, 0.5),
+                  inset 0 -8px 16px rgba(0, 0, 0, 0.5);
+    }
+    12% {
+      box-shadow: 0 0 0 8px rgba(190, 215, 255, 0.28), 0 22px 44px rgba(0, 0, 0, 0.75),
+                  0 0 60px rgba(170, 200, 255, 0.85), inset 0 2px 8px rgba(235, 245, 255, 0.7),
+                  inset 0 -8px 16px rgba(0, 0, 0, 0.5);
+    }
+    16% {
+      box-shadow: 0 0 0 8px rgba(223, 200, 142, 0.14), 0 22px 44px rgba(0, 0, 0, 0.75),
+                  0 0 40px rgba(223, 200, 142, 0.4), inset 0 2px 6px rgba(255, 245, 215, 0.4),
+                  inset 0 -8px 16px rgba(0, 0, 0, 0.5);
+    }
+    19% {
+      box-shadow: 0 0 0 8px rgba(190, 215, 255, 0.22), 0 22px 44px rgba(0, 0, 0, 0.75),
+                  0 0 56px rgba(170, 200, 255, 0.7), inset 0 2px 8px rgba(235, 245, 255, 0.6),
+                  inset 0 -8px 16px rgba(0, 0, 0, 0.5);
+    }
+    24% {
+      box-shadow: 0 0 0 8px rgba(223, 200, 142, 0.14), 0 22px 44px rgba(0, 0, 0, 0.75),
+                  0 0 50px rgba(223, 200, 142, 0.5), inset 0 2px 6px rgba(255, 245, 215, 0.5),
+                  inset 0 -8px 16px rgba(0, 0, 0, 0.5);
+    }
+    63% {
+      box-shadow: 0 0 0 8px rgba(190, 215, 255, 0.3), 0 22px 44px rgba(0, 0, 0, 0.75),
+                  0 0 64px rgba(170, 200, 255, 0.9), inset 0 2px 8px rgba(235, 245, 255, 0.75),
+                  inset 0 -8px 16px rgba(0, 0, 0, 0.5);
+    }
+    67% {
+      box-shadow: 0 0 0 8px rgba(223, 200, 142, 0.14), 0 22px 44px rgba(0, 0, 0, 0.75),
+                  0 0 46px rgba(223, 200, 142, 0.45), inset 0 2px 6px rgba(255, 245, 215, 0.45),
+                  inset 0 -8px 16px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  /* ===== GALLERIA ===== */
   .section-title {
     font-size: 0.85rem;
     text-transform: uppercase;
@@ -124,7 +275,10 @@
     background: #252525;
     border-radius: 3px;
     position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
   }
+  .gallery .placeholder:hover { transform: translateY(-4px); }
   .gallery .placeholder::after {
     content: '';
     position: absolute;
@@ -134,6 +288,17 @@
     border: 1px solid #3a3a3a;
     border-radius: 50%;
   }
+  /* riflesso dorato che scorre */
+  .gallery .placeholder::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(223, 200, 142, 0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: riflesso 3.5s ease-in-out infinite;
+  }
+  @keyframes riflesso { to { transform: translateX(100%); } }
+
   .footer {
     text-align: center;
     font-size: 0.8rem;
@@ -141,9 +306,21 @@
     padding-top: 20px;
     border-top: 1px solid #2a2a2a;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    h1.oro-texturizzato { animation: none; }
+    .play-btn::before,
+    .play-btn span::after,
+    .gallery .placeholder::before { animation: none; }
+    .play-btn:hover span { animation: none; }
+    .play-btn span, .play-btn span::before, .gallery .placeholder { transition: none; }
+  }
 </style>
 </head>
 <body>
+
+<canvas id="tempesta" aria-hidden="true"></canvas>
+
 <div class="container">
 
   <h1 class="oro-texturizzato">TA'EN TYTAN</h1>
@@ -153,11 +330,11 @@
   <p class="quote">«La cosa più grande della tua vita non si lascia guardare intera, eppure ci stai dentro.»</p>
 
   <div class="video-wrap" id="box1">
-    <button class="play-btn" onclick="apriVideo('box1','https://peertube.uno/w/f33ESe1NpJXN7fft5hr1mS')"><span>▶</span></button>
+    <button class="play-btn" aria-label="Riproduci il video" onclick="apriVideo('box1','https://peertube.uno/w/f33ESe1NpJXN7fft5hr1mS')"><span>▶</span></button>
   </div>
 
   <div class="video-wrap" id="box2">
-    <button class="play-btn" onclick="apriVideo('box2','https://peertube.uno/w/hAhRX1ML9RGQgVaSBXuV3s')"><span>▶</span></button>
+    <button class="play-btn" aria-label="Riproduci il video" onclick="apriVideo('box2','https://peertube.uno/w/hAhRX1ML9RGQgVaSBXuV3s')"><span>▶</span></button>
   </div>
 
   <p class="section-title">Il mondo</p>
@@ -184,6 +361,7 @@
       box.innerHTML = '';
       var b = document.createElement('button');
       b.className = 'play-btn';
+      b.setAttribute('aria-label', 'Riproduci il video');
       b.innerHTML = '<span>▶</span>';
       b.onclick = function(){ apriVideo(id, id === 'box1' ? URL1 : URL2); };
       box.appendChild(b);
@@ -191,6 +369,7 @@
   }
 
   function apriVideo(id, url) {
+    if (window.fulmine) window.fulmine();   /* un fulmine quando premi play */
     chiudi(id === 'box1' ? 'box2' : 'box1');
     var box = document.getElementById(id);
     box.innerHTML = '';
@@ -199,6 +378,152 @@
     f.setAttribute('allowfullscreen', '');
     box.appendChild(f);
   }
+
+  /* effetto torcia: la luce calda segue il mouse sul play */
+  document.addEventListener('mousemove', function (e) {
+    var b = e.target.closest && e.target.closest('.play-btn');
+    if (!b) return;
+    var r = b.getBoundingClientRect();
+    b.style.setProperty('--x', (e.clientX - r.left) + 'px');
+    b.style.setProperty('--y', (e.clientY - r.top) + 'px');
+  });
+
+  /* ===== TEMPESTA ===== */
+  (function () {
+    var cv = document.getElementById('tempesta');
+    var titolo = document.querySelector('h1.oro-texturizzato');
+    var ridotto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!cv || !cv.getContext || ridotto) { window.fulmine = function () {}; return; }
+
+    var ctx = cv.getContext('2d');
+    var W = 0, H = 0;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var inCorso = false;
+
+    function misura() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      cv.width = W * dpr;
+      cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    misura();
+    window.addEventListener('resize', misura);
+
+    /* percorso a zig-zag tra due punti (spostamento del punto medio) */
+    function zigzag(a, b, spost) {
+      if (spost < 4) return [a];
+      var m = [
+        (a[0] + b[0]) / 2 + (Math.random() - 0.5) * spost,
+        (a[1] + b[1]) / 2 + (Math.random() - 0.5) * spost * 0.3
+      ];
+      return zigzag(a, m, spost / 2).concat(zigzag(m, b, spost / 2));
+    }
+
+    function creaFulmine() {
+      var x0 = W * (0.08 + Math.random() * 0.84);
+      var inizio = [x0, -10];
+      var fine = [x0 + (Math.random() - 0.5) * W * 0.25, H * (0.5 + Math.random() * 0.4)];
+      var principale = zigzag(inizio, fine, 150).concat([fine]);
+      var rami = [{ pts: principale, w: 2.6 }];
+
+      var n = 2 + Math.floor(Math.random() * 3);
+      for (var i = 0; i < n; i++) {
+        var k = 4 + Math.floor(Math.random() * (principale.length - 6));
+        var p = principale[k];
+        var verso = Math.random() < 0.5 ? -1 : 1;
+        var fineRamo = [
+          p[0] + verso * (60 + Math.random() * 160),
+          p[1] + 100 + Math.random() * 180
+        ];
+        rami.push({ pts: zigzag(p, fineRamo, 70).concat([fineRamo]), w: 1.3 });
+      }
+      return rami;
+    }
+
+    function disegna(rami, a) {
+      ctx.clearRect(0, 0, W, H);
+      /* bagliore sul cielo */
+      ctx.fillStyle = 'rgba(190, 210, 255,' + (a * 0.07) + ')';
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      rami.forEach(function (r) {
+        ctx.beginPath();
+        r.pts.forEach(function (p, i) {
+          if (i === 0) ctx.moveTo(p[0], p[1]); else ctx.lineTo(p[0], p[1]);
+        });
+        /* alone azzurro */
+        ctx.save();
+        ctx.shadowColor = 'rgba(150, 180, 255, 1)';
+        ctx.shadowBlur = 26;
+        ctx.strokeStyle = 'rgba(150, 180, 255,' + (a * 0.55) + ')';
+        ctx.lineWidth = r.w * 4.5;
+        ctx.stroke();
+        ctx.restore();
+        /* nucleo bianco */
+        ctx.save();
+        ctx.shadowColor = 'rgba(210, 225, 255, 1)';
+        ctx.shadowBlur = 8;
+        ctx.strokeStyle = 'rgba(255, 255, 255,' + a + ')';
+        ctx.lineWidth = r.w;
+        ctx.stroke();
+        ctx.restore();
+      });
+    }
+
+    /* intensità nel tempo: colpo, sfarfallio, secondo colpo, dissolvenza */
+    var sequenza = [[0, 1], [70, 0.12], [120, 0.95], [210, 0.45], [300, 0.7], [650, 0]];
+
+    function intensita(t) {
+      for (var i = 1; i < sequenza.length; i++) {
+        if (t <= sequenza[i][0]) {
+          var t0 = sequenza[i - 1][0], a0 = sequenza[i - 1][1];
+          var t1 = sequenza[i][0],     a1 = sequenza[i][1];
+          return a0 + (a1 - a0) * ((t - t0) / (t1 - t0));
+        }
+      }
+      return 0;
+    }
+
+    function colpisci() {
+      if (inCorso) return;
+      inCorso = true;
+      var rami = creaFulmine();
+      var t0 = performance.now();
+      var durata = sequenza[sequenza.length - 1][0];
+
+      if (titolo) {
+        titolo.classList.add('colpo');
+        setTimeout(function () { titolo.classList.remove('colpo'); }, 320);
+      }
+
+      function frame(ora) {
+        var t = ora - t0;
+        if (t >= durata) {
+          ctx.clearRect(0, 0, W, H);
+          inCorso = false;
+          return;
+        }
+        disegna(rami, intensita(t));
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    window.fulmine = colpisci;
+
+    /* il primo fulmine all'apertura, poi a intervalli irregolari */
+    function prossimo() {
+      setTimeout(function () {
+        if (!document.hidden) colpisci();
+        prossimo();
+      }, 9000 + Math.random() * 10000);
+    }
+    setTimeout(function () { colpisci(); prossimo(); }, 2200);
+  })();
 </script>
 </body>
 </html>
