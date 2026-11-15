@@ -248,7 +248,7 @@
     }
   }
 
-  /* ===== GALLERIA ===== */
+  /* ===== GALLERIA "IL MONDO" ===== */
   .section-title {
     font-size: 0.85rem;
     text-transform: uppercase;
@@ -257,29 +257,114 @@
     margin-bottom: 20px;
     text-align: center;
   }
+  .gallery-sub {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #6a6558;
+    margin-top: -10px;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 12px;
+    gap: 14px;
     margin-bottom: 60px;
   }
-  .gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 3px;
+
+  .card {
     display: block;
-  }
-  .gallery .placeholder {
     width: 100%;
-    padding-bottom: 56.25%;
-    background: #252525;
-    border-radius: 3px;
-    position: relative;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    background: #1f1f1f;
+    border: 1px solid rgba(223, 200, 142, 0.14);
+    border-radius: 4px;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  .gallery .placeholder:hover { transform: translateY(-4px); }
-  .gallery .placeholder::after {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(223, 200, 142, 0.5);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 24px rgba(223, 200, 142, 0.1);
+  }
+  .card:focus-visible {
+    outline: 2px solid #F2E2B6;
+    outline-offset: 3px;
+  }
+  .card .thumb {
+    display: block;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #252525;
+  }
+  .card .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s ease;
+  }
+  .card:hover .thumb img { transform: scale(1.05); }
+
+  .card .info {
+    display: block;
+    padding: 12px 14px 16px;
+  }
+  .card .badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    padding: 2px 8px;
+    border: 1px solid rgba(223, 200, 142, 0.45);
+    border-radius: 2px;
+    color: #DFC88E;
+  }
+  .card .badge.finito {
+    background: #DFC88E;
+    border-color: #DFC88E;
+    color: #1a1a1a;
+    font-weight: 700;
+  }
+  .card .badge.prossimamente {
+    border-color: #3a3a3a;
+    color: #5a564c;
+  }
+  .card .data {
+    float: right;
+    font-size: 0.72rem;
+    color: #6a6558;
+    padding-top: 3px;
+  }
+  .card .tit {
+    display: block;
+    clear: both;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 0.98rem;
+    letter-spacing: 0.06em;
+    color: #DFC88E;
+    margin: 9px 0 4px;
+  }
+  .card .desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #8a8578;
+  }
+
+  /* riquadri ancora vuoti */
+  .card.vuoto { cursor: default; }
+  .card.vuoto:hover { transform: none; border-color: rgba(223, 200, 142, 0.14); box-shadow: none; }
+  .card.vuoto .thumb::after {
     content: '';
     position: absolute;
     top: 50%; left: 50%;
@@ -288,8 +373,7 @@
     border: 1px solid #3a3a3a;
     border-radius: 50%;
   }
-  /* riflesso dorato che scorre */
-  .gallery .placeholder::before {
+  .card.vuoto .thumb::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -298,6 +382,96 @@
     animation: riflesso 3.5s ease-in-out infinite;
   }
   @keyframes riflesso { to { transform: translateX(100%); } }
+
+  /* ===== INGRANDIMENTO AL CLIC ===== */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(8, 8, 8, 0.93);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 56px 16px 24px;
+  }
+  .lightbox.aperta {
+    display: flex;
+    animation: appari 0.3s ease-out;
+  }
+  @keyframes appari { from { opacity: 0; } to { opacity: 1; } }
+
+  .lb-fig {
+    max-width: 1100px;
+    width: 100%;
+    text-align: center;
+  }
+  .lb-fig img {
+    max-width: 100%;
+    max-height: 70vh;
+    border: 1px solid rgba(223, 200, 142, 0.35);
+    border-radius: 3px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(223, 200, 142, 0.12);
+    background: #111;
+  }
+  .lb-fig figcaption { margin: 18px auto 0; max-width: 640px; }
+  .lb-fig .lb-tit {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    color: #DFC88E;
+  }
+  .lb-fig .lb-meta {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #6a6558;
+    margin: 4px 0 8px;
+  }
+  .lb-fig .lb-desc {
+    display: block;
+    font-size: 0.92rem;
+    color: #b0aa9a;
+    line-height: 1.6;
+  }
+
+  .lb-btn {
+    position: absolute;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(223, 200, 142, 0.5);
+    background: rgba(26, 26, 26, 0.7);
+    color: #DFC88E;
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .lb-btn:hover {
+    color: #F2E2B6;
+    border-color: rgba(242, 226, 182, 0.9);
+    box-shadow: 0 0 20px rgba(223, 200, 142, 0.4);
+  }
+  .lb-btn:focus-visible { outline: 2px solid #F2E2B6; outline-offset: 3px; }
+  .lb-chiudi { top: 14px; right: 14px; }
+  .lb-prev { left: 14px; top: 50%; margin-top: -24px; }
+  .lb-next { right: 14px; top: 50%; margin-top: -24px; }
+  .lightbox.singola .lb-prev,
+  .lightbox.singola .lb-next { display: none; }
+
+  @media (max-width: 700px) {
+    .lb-prev, .lb-next { top: auto; bottom: 14px; margin-top: 0; }
+    .lb-prev { left: 14px; }
+    .lb-next { right: 14px; }
+    .lb-fig img { max-height: 55vh; }
+  }
 
   /* ===== CONTATTI ===== */
   .contatti {
@@ -342,9 +516,10 @@
     h1.oro-texturizzato { animation: none; }
     .play-btn::before,
     .play-btn span::after,
-    .gallery .placeholder::before { animation: none; }
+    .card.vuoto .thumb::before { animation: none; }
     .play-btn:hover span { animation: none; }
-    .play-btn span, .play-btn span::before, .gallery .placeholder, .mail-link { transition: none; }
+    .lightbox.aperta { animation: none; }
+    .play-btn span, .play-btn span::before, .card, .card .thumb img, .mail-link { transition: none; }
   }
 </style>
 </head>
@@ -369,11 +544,8 @@
   </div>
 
   <p class="section-title">Il mondo</p>
-  <div class="gallery">
-    <div class="placeholder"></div>
-    <div class="placeholder"></div>
-    <div class="placeholder"></div>
-  </div>
+  <p class="gallery-sub">Lavori in corso · ultimo aggiornamento: <span id="aggiornamento"></span></p>
+  <div class="gallery" id="galleria"></div>
 
   <p class="section-title">Contatti</p>
   <div class="contatti">
@@ -388,7 +560,46 @@
 
 </div>
 
+<!-- Finestra con la foto ingrandita -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ingrandita">
+  <button class="lb-btn lb-chiudi" id="lb-chiudi" aria-label="Chiudi">&times;</button>
+  <button class="lb-btn lb-prev" id="lb-prev" aria-label="Foto precedente">&#8249;</button>
+  <figure class="lb-fig">
+    <img id="lb-img" src="" alt="">
+    <figcaption>
+      <span class="lb-tit" id="lb-tit"></span>
+      <span class="lb-meta" id="lb-meta"></span>
+      <span class="lb-desc" id="lb-desc"></span>
+    </figcaption>
+  </figure>
+  <button class="lb-btn lb-next" id="lb-next" aria-label="Foto successiva">&#8250;</button>
+</div>
+
 <script>
+  /* =====================================================================
+     SCHEDA DELLE FOTO  -  QUI SI AGGIORNA LA GALLERIA
+     Ogni riquadro ha: file, titolo, descrizione, data, stato.
+       file   = nome del file WebP caricato su GitHub (vuoto '' = riquadro libero)
+       stato  = 'lavorazione'  oppure  'finito'
+     ===================================================================== */
+  var AGGIORNATO = '15 novembre 2026';
+
+  var FOTO = [
+    {
+      file: 'foto-01.webp',
+      titolo: 'La valle',
+      descrizione: 'Una capanna dal tetto di paglia sulla riva del lago, ai piedi della rupe. Scena ancora in costruzione.',
+      data: '15 nov 2026',
+      stato: 'lavorazione'
+    },
+    { file: '', titolo: '', descrizione: '', data: '', stato: 'lavorazione' },
+    { file: '', titolo: '', descrizione: '', data: '', stato: 'lavorazione' },
+    { file: '', titolo: '', descrizione: '', data: '', stato: 'lavorazione' },
+    { file: '', titolo: '', descrizione: '', data: '', stato: 'lavorazione' },
+    { file: '', titolo: '', descrizione: '', data: '', stato: 'lavorazione' }
+  ];
+  /* ===================================================================== */
+
   var URL1 = 'https://peertube.uno/w/f33ESe1NpJXN7fft5hr1mS';
   var URL2 = 'https://peertube.uno/w/hAhRX1ML9RGQgVaSBXuV3s';
 
@@ -425,6 +636,114 @@
     b.style.setProperty('--x', (e.clientX - r.left) + 'px');
     b.style.setProperty('--y', (e.clientY - r.top) + 'px');
   });
+
+  /* ===== GALLERIA E INGRANDIMENTO ===== */
+  (function () {
+    var galleria = document.getElementById('galleria');
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lb-img');
+    var lbTit = document.getElementById('lb-tit');
+    var lbMeta = document.getElementById('lb-meta');
+    var lbDesc = document.getElementById('lb-desc');
+    var agg = document.getElementById('aggiornamento');
+    if (!galleria) return;
+    if (agg) agg.textContent = AGGIORNATO;
+
+    function el(tag, classe, testo) {
+      var e = document.createElement(tag);
+      if (classe) e.className = classe;
+      if (testo) e.textContent = testo;
+      return e;
+    }
+    function etichetta(stato) {
+      return stato === 'finito' ? 'Finito' : 'In lavorazione';
+    }
+
+    /* elenco delle sole foto presenti, per scorrere avanti e indietro */
+    var piene = [];
+    FOTO.forEach(function (f, i) { if (f.file) piene.push(i); });
+
+    FOTO.forEach(function (f, i) {
+      var c, thumb, info;
+      if (f.file) {
+        c = el('button', 'card');
+        c.type = 'button';
+        c.setAttribute('aria-label', 'Ingrandisci: ' + (f.titolo || 'foto'));
+        thumb = el('span', 'thumb');
+        var img = document.createElement('img');
+        img.src = f.file;
+        img.alt = (f.titolo ? f.titolo + '. ' : '') + (f.descrizione || '');
+        img.loading = 'lazy';
+        thumb.appendChild(img);
+        info = el('span', 'info');
+        info.appendChild(el('span', 'badge ' + (f.stato === 'finito' ? 'finito' : ''), etichetta(f.stato)));
+        if (f.data) info.appendChild(el('span', 'data', f.data));
+        if (f.titolo) info.appendChild(el('span', 'tit', f.titolo));
+        if (f.descrizione) info.appendChild(el('span', 'desc', f.descrizione));
+        c.appendChild(thumb);
+        c.appendChild(info);
+        c.addEventListener('click', function () { apri(piene.indexOf(i), c); });
+      } else {
+        c = el('div', 'card vuoto');
+        thumb = el('span', 'thumb');
+        info = el('span', 'info');
+        info.appendChild(el('span', 'badge prossimamente', 'Prossimamente'));
+        c.appendChild(thumb);
+        c.appendChild(info);
+      }
+      galleria.appendChild(c);
+    });
+
+    /* ----- finestra con foto ingrandita ----- */
+    var corrente = 0;
+    var apritore = null;
+
+    function mostra(n) {
+      if (!piene.length) return;
+      corrente = (n + piene.length) % piene.length;
+      var f = FOTO[piene[corrente]];
+      lbImg.src = f.file;
+      lbImg.alt = (f.titolo ? f.titolo + '. ' : '') + (f.descrizione || '');
+      lbTit.textContent = f.titolo || '';
+      lbMeta.textContent = etichetta(f.stato) + (f.data ? '  ·  ' + f.data : '');
+      lbDesc.textContent = f.descrizione || '';
+    }
+    function apri(n, daChi) {
+      apritore = daChi || null;
+      lb.classList.toggle('singola', piene.length < 2);
+      mostra(n);
+      lb.classList.add('aperta');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lb-chiudi').focus();
+    }
+    function chiudiLb() {
+      lb.classList.remove('aperta');
+      document.body.style.overflow = '';
+      if (apritore && apritore.focus) apritore.focus();
+    }
+
+    document.getElementById('lb-chiudi').addEventListener('click', chiudiLb);
+    document.getElementById('lb-prev').addEventListener('click', function () { mostra(corrente - 1); });
+    document.getElementById('lb-next').addEventListener('click', function () { mostra(corrente + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) chiudiLb(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('aperta')) return;
+      if (e.key === 'Escape') chiudiLb();
+      else if (e.key === 'ArrowLeft') mostra(corrente - 1);
+      else if (e.key === 'ArrowRight') mostra(corrente + 1);
+    });
+
+    /* scorrimento con il dito su telefono */
+    var x0 = null;
+    lb.addEventListener('touchstart', function (e) { x0 = e.changedTouches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      x0 = null;
+      if (Math.abs(dx) > 50) mostra(corrente + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  })();
 
   /* contatto email: l'indirizzo viene composto qui, così i programmi che
      raccolgono indirizzi dalle pagine (spam) fanno più fatica a trovarlo */
