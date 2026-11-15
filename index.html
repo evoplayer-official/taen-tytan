@@ -265,6 +265,32 @@
     margin-bottom: 24px;
     font-style: italic;
   }
+  .gallery-intro {
+    max-width: 620px;
+    margin: 0 auto 34px;
+    text-align: center;
+  }
+  .gallery-intro::before {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 1px;
+    margin: 0 auto 18px;
+    background: linear-gradient(90deg, transparent, #DFC88E, transparent);
+  }
+  .gallery-intro .intro-tit {
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.14em;
+    color: #DFC88E;
+    margin-bottom: 8px;
+  }
+  .gallery-intro .intro-txt {
+    font-size: 0.98rem;
+    line-height: 1.8;
+    color: #b0aa9a;
+  }
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -439,6 +465,30 @@
     line-height: 1.6;
   }
 
+  .lb-fig .lb-luogo {
+    display: block;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(223, 200, 142, 0.2);
+  }
+  .lb-fig .lb-luogo-tit {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9E7B38;
+    margin-bottom: 6px;
+  }
+  .lb-fig .lb-luogo-txt {
+    display: block;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: #8a8578;
+    font-style: italic;
+  }
+
   .lb-btn {
     position: absolute;
     width: 48px; height: 48px;
@@ -545,6 +595,10 @@
 
   <p class="section-title">Il mondo</p>
   <p class="gallery-sub">Lavori in corso · ultimo aggiornamento: <span id="aggiornamento"></span></p>
+  <div class="gallery-intro">
+    <p class="intro-tit" id="intro-tit"></p>
+    <p class="intro-txt" id="intro-txt"></p>
+  </div>
   <div class="gallery" id="galleria"></div>
 
   <p class="section-title">Contatti</p>
@@ -570,6 +624,10 @@
       <span class="lb-tit" id="lb-tit"></span>
       <span class="lb-meta" id="lb-meta"></span>
       <span class="lb-desc" id="lb-desc"></span>
+      <span class="lb-luogo">
+        <span class="lb-luogo-tit" id="lb-luogo-tit"></span>
+        <span class="lb-luogo-txt" id="lb-luogo-txt"></span>
+      </span>
     </figcaption>
   </figure>
   <button class="lb-btn lb-next" id="lb-next" aria-label="Foto successiva">&#8250;</button>
@@ -584,10 +642,16 @@
      ===================================================================== */
   var AGGIORNATO = '15 novembre 2026';
 
+  /* Descrizione generale: vale per tutte le foto.
+     TESTO_BREVE compare sopra la griglia; TESTO_LUNGO compare nella foto ingrandita. */
+  var TITOLO_LUOGO = "Il villaggio di Ta'en";
+  var TESTO_BREVE = "Il lago a nord-est del villaggio di Ta'en, con la capanna del Pescatore. Qui ho reinterpretato un antico sistema di pesca nativo, ispirato a culture orientali.";
+  var TESTO_LUNGO = "La capanna del Pescatore sorge sul lago a nord-est del villaggio di Ta'en. Qui ho rielaborato, con un pizzico di fantasia, un antico sistema di pesca nativo realmente esistito, ispirato ad alcune culture orientali diffuse e antiche.";
+
   var FOTO = [
     {
       file: 'foto-01.webp',
-      titolo: 'La valle',
+      titolo: 'La capanna del Pescatore',
       descrizione: 'Una capanna dal tetto di paglia sulla riva del lago, ai piedi della rupe. Scena ancora in costruzione.',
       data: '15 nov 2026',
       stato: 'lavorazione'
@@ -675,9 +739,15 @@
     var lbTit = document.getElementById('lb-tit');
     var lbMeta = document.getElementById('lb-meta');
     var lbDesc = document.getElementById('lb-desc');
+    var lbLuogoTit = document.getElementById('lb-luogo-tit');
+    var lbLuogoTxt = document.getElementById('lb-luogo-txt');
+    var introTit = document.getElementById('intro-tit');
+    var introTxt = document.getElementById('intro-txt');
     var agg = document.getElementById('aggiornamento');
     if (!galleria) return;
     if (agg) agg.textContent = AGGIORNATO;
+    if (introTit) introTit.textContent = TITOLO_LUOGO;
+    if (introTxt) introTxt.textContent = TESTO_BREVE;
 
     function el(tag, classe, testo) {
       var e = document.createElement(tag);
@@ -737,6 +807,8 @@
       lbTit.textContent = f.titolo || '';
       lbMeta.textContent = etichetta(f.stato) + (f.data ? '  ·  ' + f.data : '');
       lbDesc.textContent = f.descrizione || '';
+      lbLuogoTit.textContent = TITOLO_LUOGO;
+      lbLuogoTxt.textContent = TESTO_LUNGO;
     }
     function apri(n, daChi) {
       apritore = daChi || null;
