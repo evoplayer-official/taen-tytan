@@ -4,6 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TA'EN TYTAN</title>
+<meta name="description" content="TA'EN TYTAN è un videogioco in costruzione. Segui lo sviluppo: video, immagini dal mondo di Ta'en e novità.">
+<meta name="theme-color" content="#1a1a1a">
+
+<!-- Anteprima quando il link viene condiviso (WhatsApp, Telegram, social) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TA'EN TYTAN">
+<meta property="og:title" content="TA'EN TYTAN – Un videogioco in costruzione">
+<meta property="og:description" content="Segui lo sviluppo: video, immagini dal mondo di Ta'en e novità.">
+<meta property="og:url" content="https://taen.games/">
+<meta property="og:image" content="https://taen.games/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TA'EN TYTAN – Un videogioco in costruzione">
+<meta name="twitter:description" content="Segui lo sviluppo: video, immagini dal mondo di Ta'en e novità.">
+<meta name="twitter:image" content="https://taen.games/og-image.jpg">
+
+<!-- Icona del sito: un fulmine dorato -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1a1a'/%3E%3Cpath d='M36 6 16 36h13l-4 22 23-33H34z' fill='%23DFC88E'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -554,6 +575,144 @@
     outline-offset: 6px;
   }
 
+  /* ===== SCELTA DELLA LINGUA ===== */
+  .lingue {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 18px;
+    color: #4a4840;
+  }
+  .lingua {
+    background: none;
+    border: none;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    color: #6a6558;
+    cursor: pointer;
+    padding: 4px 6px;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+  }
+  .lingua:hover { color: #DFC88E; }
+  .lingua.attiva { color: #DFC88E; text-shadow: 0 0 12px rgba(223, 200, 142, 0.45); }
+  .lingua:focus-visible { outline: 2px solid #F2E2B6; outline-offset: 2px; }
+
+  /* ===== DIARIO DI SVILUPPO ===== */
+  .diario {
+    list-style: none;
+    max-width: 620px;
+    margin: 0 auto 10px;
+    padding: 0 0 0 22px;
+    position: relative;
+  }
+  .diario::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    bottom: 22px;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(223, 200, 142, 0.5), rgba(223, 200, 142, 0.08));
+  }
+  .diario li {
+    position: relative;
+    padding: 0 0 20px 0;
+  }
+  .diario li::before {
+    content: "";
+    position: absolute;
+    left: -21px;
+    top: 7px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 1px solid #DFC88E;
+  }
+  .diario li:first-child::before {
+    background: #DFC88E;
+    box-shadow: 0 0 10px rgba(223, 200, 142, 0.6);
+  }
+  .diario .d-data {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6a6558;
+  }
+  .diario .d-testo {
+    display: block;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #b0aa9a;
+  }
+  .diario-altro {
+    text-align: center;
+    margin: 4px 0 60px;
+    min-height: 8px;
+  }
+  .link-btn {
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(138, 133, 120, 0.45);
+    font: inherit;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8a8578;
+    padding: 0 0 2px;
+    cursor: pointer;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .link-btn:hover { color: #DFC88E; border-color: rgba(223, 200, 142, 0.6); }
+  .link-btn:focus-visible { outline: 2px solid #F2E2B6; outline-offset: 4px; }
+  .link-btn[hidden] { display: none; }
+
+  /* ===== RESTA AGGIORNATO ===== */
+  .contatti .avvisami {
+    max-width: 560px;
+    margin: 34px auto 0;
+    padding-top: 26px;
+    border-top: 1px solid #2a2a2a;
+  }
+  .contatti .avvisami-tit {
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    color: #DFC88E;
+    margin-bottom: 14px;
+  }
+  .btn-oro {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 1px solid rgba(223, 200, 142, 0.55);
+    border-radius: 2px;
+    background: rgba(223, 200, 142, 0.04);
+    color: #DFC88E;
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn-oro:hover {
+    background: rgba(223, 200, 142, 0.12);
+    border-color: #F2E2B6;
+    color: #F2E2B6;
+    box-shadow: 0 0 22px rgba(223, 200, 142, 0.25);
+  }
+  .btn-oro:focus-visible { outline: 2px solid #F2E2B6; outline-offset: 4px; }
+  .contatti .privacy-nota {
+    font-size: 0.74rem;
+    line-height: 1.6;
+    color: #6a6558;
+    margin: 14px 0 0;
+  }
+
   .footer {
     text-align: center;
     font-size: 0.8rem;
@@ -569,7 +728,8 @@
     .card.vuoto .thumb::before { animation: none; }
     .play-btn:hover span { animation: none; }
     .lightbox.aperta { animation: none; }
-    .play-btn span, .play-btn span::before, .card, .card .thumb img, .mail-link { transition: none; }
+    .play-btn span, .play-btn span::before, .card, .card .thumb img, .mail-link,
+    .lingua, .link-btn, .btn-oro { transition: none; }
   }
 </style>
 </head>
@@ -579,11 +739,17 @@
 
 <div class="container">
 
+  <nav class="lingue" aria-label="Lingua / Language">
+    <button type="button" class="lingua" id="lang-it" lang="it">IT</button>
+    <span aria-hidden="true">·</span>
+    <button type="button" class="lingua" id="lang-en" lang="en">EN</button>
+  </nav>
+
   <h1 class="oro-texturizzato">TA'EN TYTAN</h1>
 
-  <p class="tagline">Un videogioco in costruzione</p>
+  <p class="tagline" data-i18n="tagline">Un videogioco in costruzione</p>
 
-  <p class="quote">«La cosa più grande della tua vita non si lascia guardare intera, eppure ci stai dentro.»</p>
+  <p class="quote" data-i18n="quote">«La cosa più grande della tua vita non si lascia guardare intera, eppure ci stai dentro.»</p>
 
   <div class="video-wrap" id="box1">
     <button class="play-btn" aria-label="Riproduci il video" onclick="apriVideo('box1','https://peertube.uno/w/f33ESe1NpJXN7fft5hr1mS')"><span>▶</span></button>
@@ -593,19 +759,28 @@
     <button class="play-btn" aria-label="Riproduci il video" onclick="apriVideo('box2','https://peertube.uno/w/hAhRX1ML9RGQgVaSBXuV3s')"><span>▶</span></button>
   </div>
 
-  <p class="section-title">Il mondo</p>
-  <p class="gallery-sub">Lavori in corso · ultimo aggiornamento: <span id="aggiornamento"></span></p>
+  <p class="section-title" data-i18n="mondo_titolo">Il mondo</p>
+  <p class="gallery-sub"><span data-i18n="lavori">Lavori in corso</span> · <span data-i18n="ultimo_agg">ultimo aggiornamento</span>: <span id="aggiornamento"></span></p>
   <div class="gallery-intro">
     <p class="intro-tit" id="intro-tit"></p>
     <p class="intro-txt" id="intro-txt"></p>
   </div>
   <div class="gallery" id="galleria"></div>
 
-  <p class="section-title">Contatti</p>
+  <p class="section-title" data-i18n="diario_titolo">Diario di sviluppo</p>
+  <ol class="diario" id="diario"></ol>
+  <div class="diario-altro"><button type="button" class="link-btn" id="diario-btn" hidden></button></div>
+
+  <p class="section-title" data-i18n="contatti_titolo">Contatti</p>
   <div class="contatti">
-    <p>Domande, idee o collaborazioni? Scrivimi.</p>
+    <p data-i18n="contatti_testo">Domande, idee o collaborazioni? Scrivimi.</p>
     <a id="mail" class="mail-link" href="#">Scrivi un messaggio</a>
-    <noscript><p>info [chiocciola] taen.games</p></noscript>
+    <div class="avvisami">
+      <p class="avvisami-tit" data-i18n="avvisami_tit">Resta aggiornato</p>
+      <a id="avvisami" class="btn-oro" href="#">Avvisami quando ci sono novità</a>
+      <p class="privacy-nota" data-i18n="avvisami_nota">Scrivendo mi invii il tuo indirizzo email: lo userò solo per avvisarti sulle novità del gioco. Per smettere basta scrivermi.</p>
+    </div>
+    <noscript><p>info [at] taen.games</p></noscript>
   </div>
 
   <div class="footer">
@@ -635,61 +810,104 @@
 
 <script>
   /* =====================================================================
-     SCHEDA DELLE FOTO  -  QUI SI AGGIORNA LA GALLERIA
-     Ogni riquadro ha: file, titolo, descrizione, data, stato.
-       file   = nome del file WebP caricato su GitHub (vuoto '' = riquadro libero)
-       stato  = 'lavorazione'  oppure  'finito'
+     SCHEDA DEL SITO  -  QUI SI AGGIORNANO FOTO, TESTI E DIARIO
+     Ogni testo ha la versione italiana e quella inglese (_en).
+     Le date si scrivono nel formato  AAAA-MM-GG  (es. 2026-11-15):
+     la pagina le mostra da sola nella lingua giusta.
      ===================================================================== */
-  var AGGIORNATO = '15 novembre 2026';
+  var AGGIORNATO = '2026-11-15';
 
   /* Descrizione generale: vale per tutte le foto.
-     TESTO_BREVE compare sopra la griglia; TESTO_LUNGO compare nella foto ingrandita. */
+     BREVE = sopra la griglia; LUNGO = nella foto ingrandita. */
   var TITOLO_LUOGO = "Il villaggio di Ta'en";
+  var TITOLO_LUOGO_EN = "The village of Ta'en";
   var TESTO_BREVE = "Il lago a nord-est del villaggio di Ta'en, con la capanna del Pescatore. Qui ho reinterpretato un antico sistema di pesca nativo, ispirato a culture orientali.";
+  var TESTO_BREVE_EN = "The lake north-east of the village of Ta'en, with the Fisherman's hut. Here I reimagined an ancient native fishing system, inspired by Eastern cultures.";
   var TESTO_LUNGO = "La capanna del Pescatore sorge sul lago a nord-est del villaggio di Ta'en. Qui ho rielaborato, con un pizzico di fantasia, un antico sistema di pesca nativo realmente esistito, ispirato ad alcune culture orientali diffuse e antiche.";
+  var TESTO_LUNGO_EN = "The Fisherman's hut stands on the lake north-east of the village of Ta'en. Here I reworked, with a touch of imagination, an ancient native fishing system that really existed, inspired by some ancient and widespread Eastern cultures.";
 
+  /* Foto: file, titolo, descrizione, data, stato ('lavorazione' oppure 'finito').
+     file vuoto ('') = riquadro libero ("Prossimamente"). */
   var FOTO = [
     {
       file: 'foto-01.webp',
-      titolo: 'La capanna del Pescatore',
-      descrizione: 'Una capanna dal tetto di paglia sulla riva del lago, ai piedi della rupe. Scena ancora in costruzione.',
-      data: '15 nov 2026',
+      titolo: "La capanna del Pescatore",
+      titolo_en: "The Fisherman's hut",
+      descrizione: "Una capanna dal tetto di paglia sulla riva del lago, ai piedi della rupe. Scena ancora in costruzione.",
+      descrizione_en: "A thatched-roof hut on the lakeshore, at the foot of the cliff. Scene still under construction.",
+      data: '2026-11-15',
       stato: 'lavorazione'
     },
     {
       file: 'foto-02.webp',
-      titolo: 'Il pontile sul lago',
-      descrizione: 'Una piattaforma circolare di legno sull\'acqua, collegata alla riva da un pontile. A sinistra, una trave con corde e carrucola.',
-      data: '15 nov 2026',
+      titolo: "Il pontile sul lago",
+      titolo_en: "The pier on the lake",
+      descrizione: "Una piattaforma circolare di legno sull'acqua, collegata alla riva da un pontile. A sinistra, una trave con corde e carrucola.",
+      descrizione_en: "A circular wooden platform on the water, connected to the shore by a pier. On the left, a beam with ropes and a pulley.",
+      data: '2026-11-15',
       stato: 'lavorazione'
     },
     {
       file: 'foto-03.webp',
-      titolo: 'L\'occhio del lago',
-      descrizione: 'Il cuore della piattaforma: passerelle di legno attorno all\'acqua, una lanterna di carta appesa e un disco di pietra al centro.',
-      data: '15 nov 2026',
+      titolo: "L'occhio del lago",
+      titolo_en: "The eye of the lake",
+      descrizione: "Il cuore della piattaforma: passerelle di legno attorno all'acqua, una lanterna di carta appesa e un disco di pietra al centro.",
+      descrizione_en: "The heart of the platform: wooden walkways around the water, a hanging paper lantern and a stone disc in the centre.",
+      data: '2026-11-15',
       stato: 'lavorazione'
     },
     {
       file: 'foto-04.webp',
-      titolo: 'Il cancello',
-      descrizione: 'Dettaglio del cancelletto di assi e delle panche di legno lavorato, con i pali che si specchiano nell\'acqua.',
-      data: '15 nov 2026',
+      titolo: "Il cancello",
+      titolo_en: "The gate",
+      descrizione: "Dettaglio del cancelletto di assi e delle panche di legno lavorato, con i pali che si specchiano nell'acqua.",
+      descrizione_en: "Detail of the plank gate and the worked-wood benches, with the posts reflected in the water.",
+      data: '2026-11-15',
       stato: 'lavorazione'
     },
     {
       file: 'foto-05.webp',
-      titolo: 'Il passaggio',
-      descrizione: 'Il cancello visto di fronte, con la roccia a lato. Sullo sfondo si intravede una costruzione dal tetto di paglia.',
-      data: '15 nov 2026',
+      titolo: "Il passaggio",
+      titolo_en: "The passage",
+      descrizione: "Il cancello visto di fronte, con la roccia a lato. Sullo sfondo si intravede una costruzione dal tetto di paglia.",
+      descrizione_en: "The gate seen from the front, with the rock beside it. In the background you can glimpse a thatched-roof building.",
+      data: '2026-11-15',
       stato: 'lavorazione'
     },
     {
       file: 'foto-06.webp',
-      titolo: 'Dentro l\'anello',
-      descrizione: 'La passerella vista da vicino: pali e travi legati con corde, la lanterna sospesa e il disco di pietra sull\'acqua.',
-      data: '15 nov 2026',
+      titolo: "Dentro l'anello",
+      titolo_en: "Inside the ring",
+      descrizione: "La passerella vista da vicino: pali e travi legati con corde, la lanterna sospesa e il disco di pietra sull'acqua.",
+      descrizione_en: "The walkway up close: posts and beams tied with ropes, the hanging lantern and the stone disc on the water.",
+      data: '2026-11-15',
       stato: 'lavorazione'
+    }
+  ];
+
+  /* Diario di sviluppo: la voce più recente in alto (la pagina le ordina da sola).
+     Se ci sono più voci di DIARIO_VISIBILI, compare "Mostra tutto". */
+  var DIARIO_VISIBILI = 5;
+  var DIARIO = [
+    {
+      data: '2026-11-15',
+      testo: "Aggiunti il diario di sviluppo, la versione in inglese e l'iscrizione alle novità via email.",
+      testo_en: "Added the development diary, the English version and the sign-up for news by email."
+    },
+    {
+      data: '2026-11-15',
+      testo: "Online la galleria del mondo: sei inquadrature della capanna del Pescatore e del sistema di pesca sul lago.",
+      testo_en: "The world gallery is online: six views of the Fisherman's hut and the fishing system on the lake."
+    },
+    {
+      data: '2026-11-14',
+      testo: "Attivo il contatto via email: scrivimi per domande, idee e collaborazioni.",
+      testo_en: "Contact by email is now open: write to me for questions, ideas and collaborations."
+    },
+    {
+      data: '2026-11-14',
+      testo: "Pagina rinnovata: nuovo pulsante play dorato e una tempesta di fulmini sullo sfondo.",
+      testo_en: "Page refreshed: a new golden play button and a lightning storm in the background."
     }
   ];
   /* ===================================================================== */
@@ -704,7 +922,7 @@
       box.innerHTML = '';
       var b = document.createElement('button');
       b.className = 'play-btn';
-      b.setAttribute('aria-label', 'Riproduci il video');
+      b.setAttribute('aria-label', window.uiTesto ? window.uiTesto('riproduci') : 'Riproduci il video');
       b.innerHTML = '<span>▶</span>';
       b.onclick = function(){ apriVideo(id, id === 'box1' ? URL1 : URL2); };
       box.appendChild(b);
@@ -731,9 +949,70 @@
     b.style.setProperty('--y', (e.clientY - r.top) + 'px');
   });
 
-  /* ===== GALLERIA E INGRANDIMENTO ===== */
+  /* ===== LINGUA, GALLERIA, DIARIO E CONTATTI ===== */
   (function () {
+    /* testi dell'interfaccia nelle due lingue */
+    var UI = {
+      it: {
+        tagline: "Un videogioco in costruzione",
+        quote: "«La cosa più grande della tua vita non si lascia guardare intera, eppure ci stai dentro.»",
+        mondo_titolo: "Il mondo",
+        lavori: "Lavori in corso",
+        ultimo_agg: "ultimo aggiornamento",
+        diario_titolo: "Diario di sviluppo",
+        diario_tutto: "Mostra tutto",
+        diario_meno: "Mostra meno",
+        contatti_titolo: "Contatti",
+        contatti_testo: "Domande, idee o collaborazioni? Scrivimi.",
+        avvisami_tit: "Resta aggiornato",
+        avvisami_btn: "Avvisami quando ci sono novità",
+        avvisami_nota: "Scrivendo mi invii il tuo indirizzo email: lo userò solo per avvisarti sulle novità del gioco. Per smettere basta scrivermi.",
+        avvisami_ogg: "Avvisami delle novità su TA'EN TYTAN",
+        avvisami_corpo: "Ciao, vorrei essere avvisato quando ci sono novità su TA'EN TYTAN.\n\nGrazie!",
+        stato_lav: "In lavorazione",
+        stato_fin: "Finito",
+        prossimamente: "Prossimamente",
+        ingrandisci: "Ingrandisci",
+        chiudi: "Chiudi",
+        prec: "Foto precedente",
+        succ: "Foto successiva",
+        riproduci: "Riproduci il video",
+        foto_ingrandita: "Foto ingrandita"
+      },
+      en: {
+        tagline: "A video game under construction",
+        quote: "«The greatest thing in your life will not let itself be seen whole, and yet you are inside it.»",
+        mondo_titolo: "The world",
+        lavori: "Work in progress",
+        ultimo_agg: "last updated",
+        diario_titolo: "Development diary",
+        diario_tutto: "Show all",
+        diario_meno: "Show less",
+        contatti_titolo: "Contact",
+        contatti_testo: "Questions, ideas or collaborations? Write to me.",
+        avvisami_tit: "Stay updated",
+        avvisami_btn: "Let me know when there is news",
+        avvisami_nota: "By writing, you send me your email address: I will only use it to tell you about news on the game. To stop, just write to me.",
+        avvisami_ogg: "Keep me posted about TA'EN TYTAN",
+        avvisami_corpo: "Hi, I would like to be notified when there is news about TA'EN TYTAN.\n\nThanks!",
+        stato_lav: "In progress",
+        stato_fin: "Finished",
+        prossimamente: "Coming soon",
+        ingrandisci: "Enlarge",
+        chiudi: "Close",
+        prec: "Previous photo",
+        succ: "Next photo",
+        riproduci: "Play video",
+        foto_ingrandita: "Enlarged photo"
+      }
+    };
+
+    var LANG = 'it';
+    var diarioEsteso = false;
+
     var galleria = document.getElementById('galleria');
+    var diario = document.getElementById('diario');
+    var diarioBtn = document.getElementById('diario-btn');
     var lb = document.getElementById('lightbox');
     var lbImg = document.getElementById('lb-img');
     var lbTit = document.getElementById('lb-tit');
@@ -744,10 +1023,27 @@
     var introTit = document.getElementById('intro-tit');
     var introTxt = document.getElementById('intro-txt');
     var agg = document.getElementById('aggiornamento');
-    if (!galleria) return;
-    if (agg) agg.textContent = AGGIORNATO;
-    if (introTit) introTit.textContent = TITOLO_LUOGO;
-    if (introTxt) introTxt.textContent = TESTO_BREVE;
+    var mail = document.getElementById('mail');
+    var avvisami = document.getElementById('avvisami');
+
+    function ui(chiave) {
+      return (UI[LANG] && UI[LANG][chiave]) || UI.it[chiave] || '';
+    }
+    window.uiTesto = ui;
+
+    /* testo nella lingua giusta; se manca la traduzione usa l'italiano */
+    function scegli(it, en) { return (LANG === 'en' && en) ? en : (it || ''); }
+    function campo(o, nome) { return scegli(o[nome], o[nome + '_en']); }
+
+    function data(iso, mese) {
+      if (!iso) return '';
+      var p = String(iso).split('-');
+      var d = new Date(+p[0], +p[1] - 1, +p[2]);
+      if (isNaN(d.getTime())) return String(iso);
+      try {
+        return d.toLocaleDateString(LANG === 'it' ? 'it-IT' : 'en-GB', { day: 'numeric', month: mese, year: 'numeric' });
+      } catch (e) { return String(iso); }
+    }
 
     function el(tag, classe, testo) {
       var e = document.createElement(tag);
@@ -755,46 +1051,87 @@
       if (testo) e.textContent = testo;
       return e;
     }
-    function etichetta(stato) {
-      return stato === 'finito' ? 'Finito' : 'In lavorazione';
-    }
+    function etichetta(stato) { return stato === 'finito' ? ui('stato_fin') : ui('stato_lav'); }
 
     /* elenco delle sole foto presenti, per scorrere avanti e indietro */
     var piene = [];
     FOTO.forEach(function (f, i) { if (f.file) piene.push(i); });
 
-    FOTO.forEach(function (f, i) {
-      var c, thumb, info;
-      if (f.file) {
-        c = el('button', 'card');
-        c.type = 'button';
-        c.setAttribute('aria-label', 'Ingrandisci: ' + (f.titolo || 'foto'));
-        thumb = el('span', 'thumb');
-        var img = document.createElement('img');
-        img.src = f.file;
-        img.alt = (f.titolo ? f.titolo + '. ' : '') + (f.descrizione || '');
-        img.loading = 'lazy';
-        thumb.appendChild(img);
-        info = el('span', 'info');
-        info.appendChild(el('span', 'badge ' + (f.stato === 'finito' ? 'finito' : ''), etichetta(f.stato)));
-        if (f.data) info.appendChild(el('span', 'data', f.data));
-        if (f.titolo) info.appendChild(el('span', 'tit', f.titolo));
-        if (f.descrizione) info.appendChild(el('span', 'desc', f.descrizione));
-        c.appendChild(thumb);
-        c.appendChild(info);
-        c.addEventListener('click', function () { apri(piene.indexOf(i), c); });
-      } else {
-        c = el('div', 'card vuoto');
-        thumb = el('span', 'thumb');
-        info = el('span', 'info');
-        info.appendChild(el('span', 'badge prossimamente', 'Prossimamente'));
-        c.appendChild(thumb);
-        c.appendChild(info);
+    /* ----- galleria ----- */
+    function disegnaGalleria() {
+      galleria.innerHTML = '';
+      FOTO.forEach(function (f, i) {
+        var c, thumb, info;
+        if (f.file) {
+          var tit = campo(f, 'titolo');
+          var des = campo(f, 'descrizione');
+          c = el('button', 'card');
+          c.type = 'button';
+          c.setAttribute('aria-label', ui('ingrandisci') + ': ' + tit);
+          thumb = el('span', 'thumb');
+          var img = document.createElement('img');
+          img.src = f.file;
+          img.alt = (tit ? tit + '. ' : '') + des;
+          img.loading = 'lazy';
+          thumb.appendChild(img);
+          info = el('span', 'info');
+          info.appendChild(el('span', 'badge ' + (f.stato === 'finito' ? 'finito' : ''), etichetta(f.stato)));
+          if (f.data) info.appendChild(el('span', 'data', data(f.data, 'short')));
+          if (tit) info.appendChild(el('span', 'tit', tit));
+          if (des) info.appendChild(el('span', 'desc', des));
+          c.appendChild(thumb);
+          c.appendChild(info);
+          c.addEventListener('click', function () { apri(piene.indexOf(i), c); });
+        } else {
+          c = el('div', 'card vuoto');
+          thumb = el('span', 'thumb');
+          info = el('span', 'info');
+          info.appendChild(el('span', 'badge prossimamente', ui('prossimamente')));
+          c.appendChild(thumb);
+          c.appendChild(info);
+        }
+        galleria.appendChild(c);
+      });
+    }
+
+    /* ----- diario ----- */
+    function disegnaDiario() {
+      diario.innerHTML = '';
+      var lista = DIARIO.slice().sort(function (a, b) {
+        return a.data < b.data ? 1 : (a.data > b.data ? -1 : 0);
+      });
+      var quante = diarioEsteso ? lista.length : Math.min(lista.length, DIARIO_VISIBILI);
+      for (var i = 0; i < quante; i++) {
+        var li = document.createElement('li');
+        li.appendChild(el('span', 'd-data', data(lista[i].data, 'long')));
+        li.appendChild(el('span', 'd-testo', campo(lista[i], 'testo')));
+        diario.appendChild(li);
       }
-      galleria.appendChild(c);
+      if (lista.length > DIARIO_VISIBILI) {
+        diarioBtn.hidden = false;
+        diarioBtn.textContent = diarioEsteso ? ui('diario_meno') : ui('diario_tutto');
+      } else {
+        diarioBtn.hidden = true;
+      }
+    }
+    diarioBtn.addEventListener('click', function () {
+      diarioEsteso = !diarioEsteso;
+      disegnaDiario();
     });
 
-    /* ----- finestra con foto ingrandita ----- */
+    /* ----- contatti: l'indirizzo viene composto qui, così i programmi che
+       raccolgono indirizzi dalle pagine (spam) fanno più fatica a trovarlo ----- */
+    function componiContatti() {
+      var indirizzo = 'info' + '@' + 'taen.games';
+      mail.href = 'mailto:' + indirizzo;
+      mail.textContent = indirizzo;
+      avvisami.href = 'mailto:' + indirizzo +
+        '?subject=' + encodeURIComponent(ui('avvisami_ogg')) +
+        '&body=' + encodeURIComponent(ui('avvisami_corpo'));
+      avvisami.textContent = ui('avvisami_btn');
+    }
+
+    /* ----- foto ingrandita ----- */
     var corrente = 0;
     var apritore = null;
 
@@ -802,13 +1139,15 @@
       if (!piene.length) return;
       corrente = (n + piene.length) % piene.length;
       var f = FOTO[piene[corrente]];
+      var tit = campo(f, 'titolo');
+      var des = campo(f, 'descrizione');
       lbImg.src = f.file;
-      lbImg.alt = (f.titolo ? f.titolo + '. ' : '') + (f.descrizione || '');
-      lbTit.textContent = f.titolo || '';
-      lbMeta.textContent = etichetta(f.stato) + (f.data ? '  ·  ' + f.data : '');
-      lbDesc.textContent = f.descrizione || '';
-      lbLuogoTit.textContent = TITOLO_LUOGO;
-      lbLuogoTxt.textContent = TESTO_LUNGO;
+      lbImg.alt = (tit ? tit + '. ' : '') + des;
+      lbTit.textContent = tit;
+      lbMeta.textContent = etichetta(f.stato) + (f.data ? '  ·  ' + data(f.data, 'short') : '');
+      lbDesc.textContent = des;
+      lbLuogoTit.textContent = scegli(TITOLO_LUOGO, TITOLO_LUOGO_EN);
+      lbLuogoTxt.textContent = scegli(TESTO_LUNGO, TESTO_LUNGO_EN);
     }
     function apri(n, daChi) {
       apritore = daChi || null;
@@ -845,18 +1184,63 @@
       x0 = null;
       if (Math.abs(dx) > 50) mostra(corrente + (dx < 0 ? 1 : -1));
     }, { passive: true });
-  })();
 
-  /* contatto email: l'indirizzo viene composto qui, così i programmi che
-     raccolgono indirizzi dalle pagine (spam) fanno più fatica a trovarlo */
-  (function () {
-    var a = document.getElementById('mail');
-    if (!a) return;
-    var utente = 'info';
-    var dominio = 'taen.games';
-    var indirizzo = utente + '@' + dominio;
-    a.href = 'mailto:' + indirizzo;
-    a.textContent = indirizzo;
+    /* ----- cambio di lingua ----- */
+    function impostaLingua(l) {
+      LANG = (l === 'en') ? 'en' : 'it';
+      document.documentElement.lang = LANG;
+
+      var els = document.querySelectorAll('[data-i18n]');
+      for (var i = 0; i < els.length; i++) {
+        els[i].textContent = ui(els[i].getAttribute('data-i18n'));
+      }
+      agg.textContent = data(AGGIORNATO, 'long');
+      introTit.textContent = scegli(TITOLO_LUOGO, TITOLO_LUOGO_EN);
+      introTxt.textContent = scegli(TESTO_BREVE, TESTO_BREVE_EN);
+
+      disegnaGalleria();
+      disegnaDiario();
+      componiContatti();
+
+      var play = document.querySelectorAll('.play-btn');
+      for (var k = 0; k < play.length; k++) play[k].setAttribute('aria-label', ui('riproduci'));
+
+      document.getElementById('lb-chiudi').setAttribute('aria-label', ui('chiudi'));
+      document.getElementById('lb-prev').setAttribute('aria-label', ui('prec'));
+      document.getElementById('lb-next').setAttribute('aria-label', ui('succ'));
+      lb.setAttribute('aria-label', ui('foto_ingrandita'));
+
+      ['it', 'en'].forEach(function (x) {
+        var b = document.getElementById('lang-' + x);
+        b.classList.toggle('attiva', x === LANG);
+        b.setAttribute('aria-pressed', x === LANG ? 'true' : 'false');
+      });
+
+      if (lb.classList.contains('aperta')) mostra(corrente);
+    }
+
+    function cambia(l) {
+      impostaLingua(l);
+      try { history.replaceState(null, '', '#' + l); } catch (e) {}
+    }
+    document.getElementById('lang-it').addEventListener('click', function () { cambia('it'); });
+    document.getElementById('lang-en').addEventListener('click', function () { cambia('en'); });
+
+    /* lingua di partenza: #en o #it nel link, altrimenti quella del browser.
+       Non viene salvato nulla sul dispositivo di chi visita. */
+    function linguaIniziale() {
+      var h = (location.hash || '').toLowerCase();
+      if (h === '#en') return 'en';
+      if (h === '#it') return 'it';
+      var n = (navigator.language || 'it').toLowerCase();
+      return n.indexOf('it') === 0 ? 'it' : 'en';
+    }
+    window.addEventListener('hashchange', function () {
+      var h = (location.hash || '').toLowerCase();
+      if (h === '#en' || h === '#it') impostaLingua(h.slice(1));
+    });
+
+    impostaLingua(linguaIniziale());
   })();
 
   /* ===== TEMPESTA ===== */
